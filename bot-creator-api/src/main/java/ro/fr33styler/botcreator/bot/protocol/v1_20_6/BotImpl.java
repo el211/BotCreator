@@ -90,7 +90,9 @@ public class BotImpl implements Bot {
 
     @Override
     public void disconnect(String reason) {
-        channel.disconnect();
+        if (channel != null) {
+            channel.disconnect();
+        }
         logger.log(Level.INFO, "Disconnected: {0}", reason);
     }
 
