@@ -39,6 +39,9 @@ jobs:
           path: bot-creator-paper/target/BotCreator-Paper*.jar
       - name: Run release-please
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        # Forks may not allow GitHub Actions to create pull requests.
+        # A release automation failure must not fail an otherwise valid build.
+        continue-on-error: true
         uses: googleapis/release-please-action@v4
         id: release
         with:
