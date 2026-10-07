@@ -37,13 +37,15 @@ jobs:
           name: BotCreator-Paper
           archive: false
           path: bot-creator-paper/target/BotCreator-Paper*.jar
-      - uses: googleapis/release-please-action@v4
+      - name: Run release-please
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: maven
       - name: Upload Release Artifacts
-        if: ${{ steps.release.outputs.release_created }}
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.release.outputs.release_created
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release upload ${{ steps.release.outputs.tag_name }} bot-creator-main/target/BotCreator*.jar bot-creator-paper/target/BotCreator-Paper*.jar
