@@ -22,7 +22,11 @@ minigame and then make 1 bot or 15 to join along with you.
 The `bot-creator-paper` module runs BotCreator clients continuously from a Paper
 server, so a desktop PC does not need to remain online during long tests.
 
-Each file under `plugins/BotCreator/servers/*.yml` represents one target server.
+Each file under `plugins/BotCreator/servers/*.yml` represents one isolated target server.
+On a fresh install, BotCreator creates `server1.yml`, `server2.yml`, and
+`server3.yml`. Each defaults to 250 generated bots with a different name
+prefix and a different local port so the three bot pools do not get mixed.
+
 The filename is its id. For example, `server1.yml`:
 
 ```yaml
@@ -39,20 +43,25 @@ botnames:
   - Steve
 
 generated-names:
-  enabled: false
-  prefix: "Bot_"
+  enabled: true
+  prefix: "S1Bot_"
   start: 1
-  amount: 100
+  amount: 250
 
 join-delay-ms: 250
 auto-reconnect: true
 reconnect-immediately: true
 retry-delay-ms: 5000
-connect-on-startup: true
+connect-on-startup: false
 ```
 
-Add as many files as needed: `server1.yml`, `server2.yml`,
-`stress-test.yml`, and so on.
+The three defaults use separate pools:
+- `server1.yml`: `S1Bot_1` through `S1Bot_250`, port `25565`
+- `server2.yml`: `S2Bot_1` through `S2Bot_250`, port `25566`
+- `server3.yml`: `S3Bot_1` through `S3Bot_250`, port `25567`
+
+Commands always target a server id, so `/botcreator connect server1 all` only
+connects the server1 pool. Add more YAML files if more isolated targets are needed.
 
 Commands:
 

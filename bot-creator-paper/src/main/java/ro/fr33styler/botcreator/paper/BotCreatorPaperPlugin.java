@@ -15,7 +15,7 @@ public final class BotCreatorPaperPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        createExampleConfigIfNeeded();
+        createDefaultConfigsIfNeeded();
 
         workerGroup = new MultiThreadIoEventLoopGroup(NioIoHandler.newFactory());
         manager = new BotNetworkManager(this, workerGroup);
@@ -44,7 +44,7 @@ public final class BotCreatorPaperPlugin extends JavaPlugin {
         }
     }
 
-    private void createExampleConfigIfNeeded() {
+    private void createDefaultConfigsIfNeeded() {
         File serversDirectory = new File(getDataFolder(), "servers");
         if (!serversDirectory.exists() && !serversDirectory.mkdirs()) {
             getLogger().warning("Could not create target server config directory.");
@@ -53,7 +53,10 @@ public final class BotCreatorPaperPlugin extends JavaPlugin {
 
         File[] configs = serversDirectory.listFiles((directory, name) -> name.endsWith(".yml"));
         if (configs == null || configs.length == 0) {
-            saveResource("servers/example.yml", false);
+            saveResource("servers/server1.yml", false);
+            saveResource("servers/server2.yml", false);
+            saveResource("servers/server3.yml", false);
+            getLogger().info("Created 3 default isolated target configs with 250 generated bot names each.");
         }
     }
 }
