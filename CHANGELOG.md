@@ -1,5 +1,55 @@
 # Changelog
 
+## [2.0.0](https://github.com/el211/BotCreator/compare/v2.6.0...v2.0.0) (2026-10-07)
+
+
+### Features
+
+* add Paper bot controller ([6220290](https://github.com/el211/BotCreator/commit/6220290af386e1d5aa42ae6537a17a64b3266167))
+* add Paper bot controller ([2ddf800](https://github.com/el211/BotCreator/commit/2ddf80019d204dc7dd0cf6a03a74a2120ad110b9))
+* add three isolated default bot pools ([e00fd14](https://github.com/el211/BotCreator/commit/e00fd141dc1367b46a1b5d8b1bbb2aaa2b5adbca))
+* add three isolated default bot pools ([c5782a1](https://github.com/el211/BotCreator/commit/c5782a1387cd35fe0f0aa2b93d7b82fb66277b0a))
+* Added 1.7.10 support ([ea59b2a](https://github.com/el211/BotCreator/commit/ea59b2a67a742a27fb3185e14ab08279288714e1))
+* Added 26.1 support ([2948720](https://github.com/el211/BotCreator/commit/2948720c56533277880c022f681dad2419ecefc2))
+* Added 26.2 version support. ([2ec0c81](https://github.com/el211/BotCreator/commit/2ec0c81a353453045352648b5a2b4b08b86e371d))
+* Added support for 26.3 ([30052dd](https://github.com/el211/BotCreator/commit/30052dde57bdfecbc2aaaaad43e5abd3ea9bd0a3))
+* Added support for multiple versions as well ([20ca394](https://github.com/el211/BotCreator/commit/20ca394f534e210ed681aca80712abb6b2283e6c))
+* Incremented version again ([e11c2ee](https://github.com/el211/BotCreator/commit/e11c2ee48eb190cc1d90969a9b66422fb1ffb7fe))
+* Merged pull request [#26](https://github.com/el211/BotCreator/issues/26) which adds login retry and delay ([12e54bd](https://github.com/el211/BotCreator/commit/12e54bdcc5317c8a5be608095e491c476fee6de6))
+* Now you can run the bot creator via the command line! ([0f55abe](https://github.com/el211/BotCreator/commit/0f55abef19fd8edbcc97b3f82e8054d0b43f635a))
+
+
+### Bug Fixes
+
+* Added more netty stuff to ensure compatibility on all systems ([cfc6e43](https://github.com/el211/BotCreator/commit/cfc6e439693a28022e2d0dad2d11a7a115429e6e))
+* apply local bot godmode immediately ([ccc573d](https://github.com/el211/BotCreator/commit/ccc573db5a9e91f76fe14b7dedd4e83c0aa6c3da))
+* Brought back the system look and feel to bring back dark mode for linux since this didn't fix an issue for a specific user having issues with the ui ([8cf0d09](https://github.com/el211/BotCreator/commit/8cf0d09c2c01bdf7aab73f725a47ee9a08cb2899))
+* Fixed a compilation issue ([e5841d5](https://github.com/el211/BotCreator/commit/e5841d581c2453cd12a823d9bb7bee493b24ba25))
+* Fixed an issue on 1.8.8 where the respawn wouldn't work due to triggering at wrong status ([9706c76](https://github.com/el211/BotCreator/commit/9706c76120058535579cfca52f86cd84fadc234c))
+* Fixed an issue on Windows where the interface would glitch out due to direct draw ([9706c76](https://github.com/el211/BotCreator/commit/9706c76120058535579cfca52f86cd84fadc234c))
+* Fixed json to use the length prefix instead of yolo it ([ea59b2a](https://github.com/el211/BotCreator/commit/ea59b2a67a742a27fb3185e14ab08279288714e1))
+* Fixed some issues related to bot launcher ([61942cf](https://github.com/el211/BotCreator/commit/61942cf1f734e5e15d07d0cd68cb5c53215d2063))
+* Improved the performance of the nbt string parser ([eb72a01](https://github.com/el211/BotCreator/commit/eb72a01baa15999eef16fad8537d3c9adf34ffdd))
+* Minified jar quite a bit ([cc1dd47](https://github.com/el211/BotCreator/commit/cc1dd4762b3171838ecc93f96cf618d94a80be9c))
+* Now 1.20.6 and 1.21.11 will respawn the bots upon death ([9706c76](https://github.com/el211/BotCreator/commit/9706c76120058535579cfca52f86cd84fadc234c))
+* Now if the bots fail to join in command line the program will end ([ea59b2a](https://github.com/el211/BotCreator/commit/ea59b2a67a742a27fb3185e14ab08279288714e1))
+* Now it'll tell the reason in case you couldn't connect ([f943a5a](https://github.com/el211/BotCreator/commit/f943a5a9031ee5f6535cbdb464523dd737dd5b4f))
+* Now switching versions won't prevent bots from joining the sever ([60c5356](https://github.com/el211/BotCreator/commit/60c5356090ca2c906c176e1516ead55159b24f50))
+* Now the bots will auto respawn upon death ([3cda403](https://github.com/el211/BotCreator/commit/3cda403219195194e9ff218a9c9e788919ae93f3))
+* Now the bots will join the server anyway if a resource pack is present ([3cda403](https://github.com/el211/BotCreator/commit/3cda403219195194e9ff218a9c9e788919ae93f3))
+* Now the client will disconnect and announce it if the server is in online mode. ([3cda403](https://github.com/el211/BotCreator/commit/3cda403219195194e9ff218a9c9e788919ae93f3))
+* reconnect dropped bots immediately ([680f2d9](https://github.com/el211/BotCreator/commit/680f2d96b12aa5a33ca828e1150bb3d451f5ba89))
+* reconnect dropped bots immediately ([bd79f09](https://github.com/el211/BotCreator/commit/bd79f0963642fabb5e20b67679eff59bedbc5947))
+* Refactored classes and improved logic ([e2d0b8b](https://github.com/el211/BotCreator/commit/e2d0b8b660b205c4479801211db8b5065d112807))
+* release decoded Netty buffers ([9bfacad](https://github.com/el211/BotCreator/commit/9bfacad045ce355d6c86eb822aa37b7004e14b98))
+* release Netty buffers and document connection throttling ([b03d7c1](https://github.com/el211/BotCreator/commit/b03d7c1d93c20cf9b5e89aac6f27c5218b579e82))
+* Removed get System look and feel to hopefully fix issues on windows ([35cb6c0](https://github.com/el211/BotCreator/commit/35cb6c041485b1b75a0732dc95c7ad8796f7bd58))
+
+
+### Documentation
+
+* explain Paper connection throttle for bot pools ([64bcc16](https://github.com/el211/BotCreator/commit/64bcc16bcf0aa5a3b3a6627ebfc27eae4b86b6ab))
+
 ## [2.6.0](https://github.com/Fr33styler/BotCreator/compare/v2.5.0...v2.6.0) (2026-09-25)
 
 
