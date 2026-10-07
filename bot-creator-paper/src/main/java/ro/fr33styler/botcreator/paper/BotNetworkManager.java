@@ -72,7 +72,7 @@ final class BotNetworkManager {
     boolean isLocalGodmodeBot(String playerName) {
         for (ManagedBotServer server : servers.values()) {
             BotServerConfig config = server.config();
-            if (config.godmode && config.localServer && server.isLoggedIn(playerName)) {
+            if (config.godmode && config.localServer && server.isConnected(playerName)) {
                 return true;
             }
         }

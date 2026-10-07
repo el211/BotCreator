@@ -118,6 +118,11 @@ final class ManagedBotServer {
         return handle != null && handle.bot.isLoggedIn();
     }
 
+    boolean isConnected(String botName) {
+        BotHandle handle = bots.get(botName.toLowerCase(Locale.ROOT));
+        return handle != null && handle.bot.isOnline();
+    }
+
     List<String> botNames() {
         List<String> names = new ArrayList<>();
         for (BotHandle handle : bots.values()) {

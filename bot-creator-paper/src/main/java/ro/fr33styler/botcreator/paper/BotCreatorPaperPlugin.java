@@ -29,7 +29,7 @@ public final class BotCreatorPaperPlugin extends JavaPlugin {
         command.setExecutor(commandHandler);
         command.setTabCompleter(commandHandler);
 
-        getServer().getPluginManager().registerEvents(new GodmodeListener(manager), this);
+        getServer().getPluginManager().registerEvents(new GodmodeListener(this, manager), this);
 
         getLogger().info("BotCreator Paper enabled. Configure targets in plugins/BotCreator/servers/.");
     }
