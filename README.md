@@ -75,6 +75,19 @@ Commands:
 /botcreator chat <server> <bot|all> <message...>
 ```
 
+### Connection throttling during large tests
+
+Paper's `bukkit.yml` defaults to a per-IP connection throttle. Because all BotCreator clients from one controller normally share the same source IP, a small `join-delay-ms` such as 250 ms can cause most bots to be kicked with `Connection throttled! Please wait before reconnecting.`
+
+For an isolated load-test server, disable that throttle on the target and restart it:
+
+```yaml
+settings:
+  connection-throttle: 0
+```
+
+If the target must keep connection throttling enabled, set `join-delay-ms` to at least the target throttle value instead.
+
 `reconnect-immediately: true` makes an established bot attempt to reconnect as soon as a drop is detected. If that reconnect fails, `retry-delay-ms` is used as a backoff before trying again.\n\n`godmode: true` is true server-side invulnerability only when that target is the
 same Paper server running this plugin (`local-server: true`). A client cannot
 force a different remote Minecraft server to ignore damage because damage is

@@ -24,28 +24,31 @@ public class PacketDecoder extends ReplayingDecoder<Packet> {
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf in, List<Object> list) {
         ByteBuf byteBuf = in.readBytes(ByteBufUtil.readVarInt(in));
 
-        if (options.compressed()) {
-            int uncompressed = ByteBufUtil.readVarInt(byteBuf);
+        try {
+            if (options.compressed()) {
+                int uncompressed = ByteBufUtil.readVarInt(byteBuf);
 
-            if (uncompressed > 0) {
+                if (uncompressed > 0) {
+                    byte[] compressedBytes = new byte[byteBuf.readableBytes()];
+                    byteBuf.readBytes(compressedBytes);
 
-                byte[] compressedBytes = new byte[byteBuf.readableBytes()];
-                byteBuf.readBytes(compressedBytes);
+                    decompresser.setInput(compressedBytes);
 
-                decompresser.setInput(compressedBytes);
-
-                try {
-                    byte[] result = new byte[uncompressed];
-
-                    decompresser.inflate(result);
-                    decompresser.reset();
-
-                    byteBuf.writeBytes(result);
-                } catch (DataFormatException ignored) {}
+                    try {
+                        byte[] result = new byte[uncompressed];
+                        decompresser.inflate(result);
+                        byteBuf.writeBytes(result);
+                    } catch (DataFormatException ignored) {
+                    } finally {
+                        decompresser.reset();
+                    }
+                }
             }
-        }
 
-        options.getStage().create(byteBuf, list);
+            options.getStage().create(byteBuf, list);
+        } finally {
+            byteBuf.release();
+        }
     }
 
 }
