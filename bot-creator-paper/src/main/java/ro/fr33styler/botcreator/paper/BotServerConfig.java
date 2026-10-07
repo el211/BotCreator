@@ -25,6 +25,7 @@ final class BotServerConfig {
     final List<String> botNames;
     final long joinDelayMs;
     final boolean autoReconnect;
+    final boolean reconnectImmediately;
     final long retryDelayMs;
     final boolean connectOnStartup;
     final boolean godmode;
@@ -39,6 +40,7 @@ final class BotServerConfig {
             List<String> botNames,
             long joinDelayMs,
             boolean autoReconnect,
+            boolean reconnectImmediately,
             long retryDelayMs,
             boolean connectOnStartup,
             boolean godmode,
@@ -52,6 +54,7 @@ final class BotServerConfig {
         this.botNames = List.copyOf(botNames);
         this.joinDelayMs = joinDelayMs;
         this.autoReconnect = autoReconnect;
+        this.reconnectImmediately = reconnectImmediately;
         this.retryDelayMs = retryDelayMs;
         this.connectOnStartup = connectOnStartup;
         this.godmode = godmode;
@@ -98,6 +101,7 @@ final class BotServerConfig {
         long joinDelayMs = Math.max(0L, yaml.getLong("join-delay-ms", 250L));
         long retryDelayMs = Math.max(1000L, yaml.getLong("retry-delay-ms", 5000L));
         boolean autoReconnect = yaml.getBoolean("auto-reconnect", true);
+        boolean reconnectImmediately = yaml.getBoolean("reconnect-immediately", true);
         boolean connectOnStartup = yaml.getBoolean("connect-on-startup", false);
         boolean godmode = yaml.getBoolean("godmode", false);
 
@@ -120,6 +124,7 @@ final class BotServerConfig {
                 new ArrayList<>(names),
                 joinDelayMs,
                 autoReconnect,
+                reconnectImmediately,
                 retryDelayMs,
                 connectOnStartup,
                 godmode,

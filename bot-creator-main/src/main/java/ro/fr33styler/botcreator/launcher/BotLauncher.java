@@ -13,6 +13,7 @@ public class BotLauncher {
     private static final long LOGIN_TIMEOUT_MS = 30000L;
     private static final long CONNECT_TIMEOUT_MS = 5000L;
     private static final long LOGIN_POLL_MS = 50L;
+    private static final long ONLINE_MONITOR_MS = 100L;
 
     private final Collection<Bot> bots;
     private final EventLoopGroup workerGroup;
@@ -52,7 +53,9 @@ public class BotLauncher {
             return;
         }
 
-        scheduler.schedule(this::runCycle, retryDelay, TimeUnit.MILLISECONDS);
+        // All bots are currently logged in. Poll quickly so an unexpected
+        // disconnect gets a reconnect attempt almost immediately.
+        scheduler.schedule(this::runCycle, ONLINE_MONITOR_MS, TimeUnit.MILLISECONDS);
     }
 
     private void awaitLogin(Bot bot, long deadline, long connectDeadline, boolean wasOnline) {

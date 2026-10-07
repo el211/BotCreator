@@ -72,6 +72,7 @@ final class BotCreatorCommand implements CommandExecutor, TabCompleter {
                 + " logged-in=" + server.loggedInBots() + "/" + server.totalBots()
                 + " desired=" + server.desiredBots()
                 + " auto-reconnect=" + config.autoReconnect
+                + " reconnect-immediately=" + config.reconnectImmediately
                 + " godmode=" + config.godmode
                 + (config.godmode && !config.localServer ? " (remote: not enforceable)" : ""));
     }

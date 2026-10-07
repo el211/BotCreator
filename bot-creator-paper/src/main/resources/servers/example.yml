@@ -32,8 +32,12 @@ generated-names:
 # Delay between initial bot joins.
 join-delay-ms: 250
 
-# Reconnect a bot if login fails or it gets disconnected.
+# Reconnect a bot if it gets disconnected.
 auto-reconnect: true
+
+# If an already-connected bot drops, try once immediately.
+# If that immediate reconnect cannot log in, retry-delay-ms is used as backoff.
+reconnect-immediately: true
 retry-delay-ms: 5000
 
 # Connect all configured bots when this plugin starts/reloads.
