@@ -21,7 +21,11 @@ public class PacketDecoder extends ReplayingDecoder<Packet> {
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf in, List<Object> list) {
         ByteBuf byteBuf = in.readBytes(ByteBufUtil.readVarInt(in));
 
-        options.getStage().create(byteBuf, list);
+        try {
+            options.getStage().create(byteBuf, list);
+        } finally {
+            byteBuf.release();
+        }
     }
 
 }
