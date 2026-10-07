@@ -1,0 +1,36 @@
+# Default BotCreator target server2.
+# Each file is isolated: commands for this server only control this server's bot pool.
+enabled: true
+
+# Change these values to the actual target for this bot pool.
+ip: "127.0.0.1"
+port: 25566
+version: "26.3"
+
+# Set true only when this target is the SAME Paper server running BotCreator.
+local-server: false
+
+# True invulnerability only works for a local target.
+godmode: false
+
+# Optional exact names can be added here.
+botnames: []
+
+# This pool gets 250 unique generated names.
+# server2 uses its own prefix so its bots cannot be confused with another pool.
+generated-names:
+  enabled: true
+  prefix: "S2Bot_"
+  start: 1
+  amount: 250
+
+# Stagger connections to avoid a connection burst.
+join-delay-ms: 250
+
+auto-reconnect: true
+reconnect-immediately: true
+retry-delay-ms: 5000
+
+# Safe default: installing/restarting the controller does NOT automatically
+# connect 250 bots. Use /botcreator connect server2 all when ready.
+connect-on-startup: false
