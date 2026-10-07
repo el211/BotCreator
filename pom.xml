@@ -10,6 +10,7 @@
     <modules>
         <module>bot-creator-api</module>
         <module>bot-creator-main</module>
+        <module>bot-creator-paper</module>
     </modules>
 
     <properties>

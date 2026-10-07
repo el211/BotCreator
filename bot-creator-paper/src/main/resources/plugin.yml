@@ -1,0 +1,19 @@
+name: BotCreator
+version: '2.6.0'
+main: ro.fr33styler.botcreator.paper.BotCreatorPaperPlugin
+description: Run and manage BotCreator clients from a Paper server.
+author: el211
+website: https://github.com/el211/BotCreator
+api-version: '1.21.11'
+
+commands:
+  botcreator:
+    description: Manage BotCreator target servers and bots.
+    usage: /botcreator <list|reload|status|connect|disconnect|command|chat>
+    aliases: [bots, botserver]
+    permission: botcreator.admin
+
+permissions:
+  botcreator.admin:
+    description: Allows full control of BotCreator.
+    default: op

@@ -25,18 +25,25 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - uses: actions/upload-artifact@v7
+      - name: Upload desktop artifact
+        uses: actions/upload-artifact@v7
         with:
-          name: Package
+          name: BotCreator-Desktop
           archive: false
           path: bot-creator-main/target/BotCreator*.jar
+      - name: Upload Paper artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: BotCreator-Paper
+          archive: false
+          path: bot-creator-paper/target/BotCreator-Paper*.jar
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: maven
-      - name: Upload Release Artifact
+      - name: Upload Release Artifacts
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.release.outputs.tag_name }} bot-creator-main/target/BotCreator*.jar
+        run: gh release upload ${{ steps.release.outputs.tag_name }} bot-creator-main/target/BotCreator*.jar bot-creator-paper/target/BotCreator-Paper*.jar
