@@ -1,0 +1,40 @@
+# Each YAML file in plugins/BotCreator/servers/ is one target Minecraft server.
+enabled: true
+
+# Target server connection.
+ip: "127.0.0.1"
+port: 25565
+version: "26.3"
+
+# Set this to true when this target is the SAME Paper server that is running
+# the BotCreator plugin. Loopback + the same port is also detected automatically.
+# True godmode can only be enforced on a local target because damage is
+# server-authoritative.
+local-server: true
+
+# When enabled for a local target, matching connected BotCreator players cannot
+# take damage.
+godmode: false
+
+# Exact bot usernames. Java usernames must be 3-16 characters and use A-Z,
+# a-z, 0-9 or underscore.
+botnames:
+  - Lucy
+  - Steve
+
+# Optional generated names are appended after botnames.
+generated-names:
+  enabled: false
+  prefix: "Bot_"
+  start: 1
+  amount: 100
+
+# Delay between initial bot joins.
+join-delay-ms: 250
+
+# Reconnect a bot if login fails or it gets disconnected.
+auto-reconnect: true
+retry-delay-ms: 5000
+
+# Connect all configured bots when this plugin starts/reloads.
+connect-on-startup: false

@@ -29,14 +29,16 @@ jobs:
         with:
           name: Package
           archive: false
-          path: bot-creator-main/target/BotCreator*.jar
+          path: |
+            bot-creator-main/target/BotCreator*.jar
+            bot-creator-paper/target/BotCreator-Paper*.jar
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: maven
-      - name: Upload Release Artifact
+      - name: Upload Release Artifacts
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.release.outputs.tag_name }} bot-creator-main/target/BotCreator*.jar
+        run: gh release upload ${{ steps.release.outputs.tag_name }} bot-creator-main/target/BotCreator*.jar bot-creator-paper/target/BotCreator-Paper*.jar
