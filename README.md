@@ -46,6 +46,7 @@ generated-names:
 
 join-delay-ms: 250
 auto-reconnect: true
+reconnect-immediately: true
 retry-delay-ms: 5000
 connect-on-startup: true
 ```
@@ -65,7 +66,7 @@ Commands:
 /botcreator chat <server> <bot|all> <message...>
 ```
 
-`godmode: true` is true server-side invulnerability only when that target is the
+`reconnect-immediately: true` makes an established bot attempt to reconnect as soon as a drop is detected. If that reconnect fails, `retry-delay-ms` is used as a backoff before trying again.\n\n`godmode: true` is true server-side invulnerability only when that target is the
 same Paper server running this plugin (`local-server: true`). A client cannot
 force a different remote Minecraft server to ignore damage because damage is
 server-authoritative.

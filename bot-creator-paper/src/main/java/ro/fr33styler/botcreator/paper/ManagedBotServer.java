@@ -20,7 +20,7 @@ final class ManagedBotServer {
     private static final long LOGIN_TIMEOUT_MS = 30_000L;
     private static final long CONNECT_TIMEOUT_MS = 5_000L;
     private static final long LOGIN_POLL_MS = 50L;
-    private static final long ONLINE_MONITOR_MS = 1_000L;
+    private static final long ONLINE_MONITOR_MS = 100L;
 
     private final BotCreatorPaperPlugin plugin;
     private final BotServerConfig config;
@@ -215,7 +215,7 @@ final class ManagedBotServer {
         long now = System.currentTimeMillis();
         boolean online = handle.bot.isOnline();
         if ((!online && (wasOnline || now >= connectDeadline)) || now >= loginDeadline) {
-            onConnectionLost(handle, "Did not finish logging in");
+            onLoginFailed(handle, "Did not finish logging in");
             return;
         }
 
@@ -241,15 +241,33 @@ final class ManagedBotServer {
         }, ONLINE_MONITOR_MS, TimeUnit.MILLISECONDS);
     }
 
-    private void onConnectionLost(BotHandle handle, String reason) {
+    private void onLoginFailed(BotHandle handle, String reason) {
         if (handle.bot.isOnline()) {
             handle.bot.disconnect(reason);
         }
 
         if (!closed.get() && handle.desiredConnected.get() && config.autoReconnect) {
             plugin.getLogger().warning("[" + config.id + "] " + handle.bot.getName()
-                    + " disconnected; retrying in " + config.retryDelayMs + "ms.");
+                    + " could not log back in; retrying in " + config.retryDelayMs + "ms.");
             scheduleConnect(handle, config.retryDelayMs);
+        }
+    }
+
+    private void onConnectionLost(BotHandle handle, String reason) {
+        if (handle.bot.isOnline()) {
+            handle.bot.disconnect(reason);
+        }
+
+        if (!closed.get() && handle.desiredConnected.get() && config.autoReconnect) {
+            long delay = config.reconnectImmediately ? 0L : config.retryDelayMs;
+            if (delay == 0L) {
+                plugin.getLogger().warning("[" + config.id + "] " + handle.bot.getName()
+                        + " disconnected; reconnecting immediately.");
+            } else {
+                plugin.getLogger().warning("[" + config.id + "] " + handle.bot.getName()
+                        + " disconnected; retrying in " + delay + "ms.");
+            }
+            scheduleConnect(handle, delay);
         }
     }
 
