@@ -20,11 +20,11 @@ final class GodmodeListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
+        player.getScheduler().run(plugin, task -> {
             if (player.isOnline() && manager.isLocalGodmodeBot(player.getName())) {
                 player.setInvulnerable(true);
             }
-        });
+        }, null);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

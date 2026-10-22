@@ -5,6 +5,7 @@ description: Run and manage BotCreator clients from a Paper server.
 author: el211
 website: https://github.com/el211/BotCreator
 api-version: '1.21.11'
+folia-supported: true
 
 commands:
   botcreator:
